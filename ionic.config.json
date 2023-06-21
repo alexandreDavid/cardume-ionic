@@ -1,0 +1,7 @@
+{
+  "name": "cardume",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
