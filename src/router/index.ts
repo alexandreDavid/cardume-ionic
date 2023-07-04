@@ -15,9 +15,10 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/groups/:id/next-event',
+        redirect: { name: 'group-next-event' },
       },
       {
+        name: 'group-next-event',
         path: 'next-event',
         component: () => import('@/pages/groups/_id/NextEvent.vue'),
       },

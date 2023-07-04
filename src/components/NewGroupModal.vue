@@ -35,6 +35,9 @@
 </template>
 
 <script setup lang="ts">
+  import { useRouter } from 'vue-router'
+  import { addDoc } from 'firebase/firestore'
+  import { groupsRef } from '@/plugins/firebase'
   import {
     IonButtons,
     IonButton,
@@ -48,6 +51,8 @@
     IonList,
   } from '@ionic/vue'
   import { ref, computed } from 'vue'
+
+  const router = useRouter()
 
   const props = defineProps<{
     modelValue: boolean
@@ -66,7 +71,12 @@
     isOpen.value = false
   }
 
-  const confirm = () => {
+  const confirm = async () => {
+    const { id } = await addDoc(groupsRef, {
+      name: name.value,
+    })
+    router.push(`groups/${id}`)
+
     isOpen.value = false
   }
 </script>

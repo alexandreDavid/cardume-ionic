@@ -11,22 +11,17 @@
           <ion-title size="large">My groups</ion-title>
         </ion-toolbar>
       </ion-header>
-
-      <ion-button tab="tab3" href="/groups/1/members">
-        <ion-label>Group 1</ion-label>
-      </ion-button>
+      <ion-content>
+        <suspense>
+          <MyGroupsList />
+          <template #fallback> Loading... </template>
+        </suspense>
+      </ion-content>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-  import {
-    IonPage,
-    IonHeader,
-    IonToolbar,
-    IonLabel,
-    IonTitle,
-    IonContent,
-    IonButton,
-  } from '@ionic/vue'
+  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue'
+  import MyGroupsList from '@/components/MyGroupsList.vue'
 </script>

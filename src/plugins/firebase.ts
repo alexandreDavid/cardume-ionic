@@ -15,7 +15,7 @@ export const firebaseApp = initializeApp({
 })
 
 // used for the firestore refs
-const db = getFirestore(firebaseApp)
+export const db = getFirestore(firebaseApp)
 
 // Analytics
 getAnalytics(firebaseApp)
@@ -23,4 +23,4 @@ getAnalytics(firebaseApp)
 export const auth = getAuth()
 
 // here we can export reusable database references
-export const todosRef = collection(db, 'todos')
+export const groupsRef = collection(db, 'groups')
