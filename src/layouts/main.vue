@@ -1,5 +1,13 @@
 <template>
-  <ion-page>
+  <ion-menu content-id="main-content" side="end">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu Content</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">This is the menu content.</ion-content>
+  </ion-menu>
+  <ion-page id="main-content" v-bind="$attrs">
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
@@ -37,6 +45,11 @@
     IonIcon,
     IonPage,
     IonRouterOutlet,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
   } from '@ionic/vue'
   import { add, home, list, mail } from 'ionicons/icons'
   import { ref } from 'vue'

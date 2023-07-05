@@ -36,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  { path: '/login', component: () => import('@/pages/Login.vue')},
+  { path: '/login', component: () => import('@/pages/Login.vue') },
   {
     path: '/',
     component: MainLayout,
@@ -50,15 +50,15 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'home',
-        component: () => import('@/pages/Home.vue'),
+        component: () => import('@/pages/main/Home.vue'),
       },
       {
         path: 'my-groups',
-        component: () => import('@/pages/MyGroups.vue'),
+        component: () => import('@/pages/main/MyGroups.vue'),
       },
       {
         path: 'messages',
-        component: () => import('@/pages/Messages.vue'),
+        component: () => import('@/pages/main/Messages.vue'),
       },
     ],
   },
