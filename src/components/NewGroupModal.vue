@@ -22,12 +22,12 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input
-            v-model="name"
+          <ion-textarea
+            v-model="description"
             type="text"
-            label="Enter your name"
-            placeholder="Your name"
-          ></ion-input>
+            label="Enter your description"
+            placeholder="Your description"
+          ></ion-textarea>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -49,6 +49,7 @@
     IonItem,
     IonInput,
     IonList,
+    IonTextarea,
   } from '@ionic/vue'
   import { ref, computed } from 'vue'
 
@@ -61,6 +62,7 @@
   const emits = defineEmits(['update:modelValue'])
 
   const name = ref<string>('')
+  const description = ref<string>('')
 
   const isOpen = computed<boolean>({
     get: () => props.modelValue,
@@ -74,6 +76,7 @@
   const confirm = async () => {
     const { id } = await addDoc(groupsRef, {
       name: name.value,
+      description: description.value,
     })
     router.push(`groups/${id}`)
 

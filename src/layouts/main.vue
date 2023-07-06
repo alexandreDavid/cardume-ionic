@@ -1,12 +1,5 @@
 <template>
-  <ion-menu content-id="main-content" side="end">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
-  </ion-menu>
+  <MainMenu />
   <ion-page id="main-content" v-bind="$attrs">
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
@@ -45,15 +38,11 @@
     IonIcon,
     IonPage,
     IonRouterOutlet,
-    IonMenu,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
   } from '@ionic/vue'
   import { add, home, list, mail } from 'ionicons/icons'
   import { ref } from 'vue'
   import NewGroupModal from '@/components/NewGroupModal.vue'
+  import MainMenu from '@/components/MainMenu.vue'
 
   const showCreationModal = ref<boolean>(false)
 </script>

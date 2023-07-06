@@ -4,6 +4,7 @@ import { getCurrentUser } from 'vuefire'
 
 import MainLayout from '@/layouts/main.vue'
 import GroupLayout from '@/layouts/group.vue'
+import AccountLayout from '@/layouts/account.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -33,6 +34,23 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'chat',
         component: () => import('@/pages/groups/_id/Chat.vue'),
+      },
+    ],
+  },
+  {
+    path: '/account',
+    component: AccountLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: 'me',
+        component: () => import('@/pages/account/Me.vue'),
+      },
+      {
+        path: '',
+        redirect: 'me',
       },
     ],
   },
