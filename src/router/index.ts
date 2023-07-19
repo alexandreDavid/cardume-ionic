@@ -64,11 +64,15 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/home',
+        redirect: '/agenda',
       },
       {
-        path: 'home',
-        component: () => import('@/pages/main/Home.vue'),
+        path: 'agenda',
+        component: () => import('@/pages/main/Agenda.vue'),
+      },
+      {
+        path: 'discover',
+        component: () => import('@/pages/main/Discover.vue'),
       },
       {
         path: 'my-groups',

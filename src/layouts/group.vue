@@ -56,6 +56,7 @@
     IonTitle,
     IonButtons,
     IonButton,
+    IonBackButton,
   } from '@ionic/vue'
   import { ellipse, square, triangle, chatbubbles, arrowBack } from 'ionicons/icons'
 

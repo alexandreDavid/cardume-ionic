@@ -1,12 +1,12 @@
 <template>
   <ion-page>
-    <MainHeader title="Home" />
+    <MainHeader title="Discover" />
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
+      <!-- <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Home</ion-title>
+          <ion-title size="large">Discover</ion-title>
         </ion-toolbar>
-      </ion-header>
+      </ion-header> -->
 
       <ExploreContainer name="Tab 1 page" />
     </ion-content>

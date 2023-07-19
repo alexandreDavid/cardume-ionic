@@ -2,23 +2,27 @@
   <ion-page>
     <MainHeader title="My groups" />
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">My groups</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <suspense>
-          <MyGroupsList />
-          <template #fallback> Loading... </template>
-        </suspense>
-      </ion-content>
+      <suspense>
+        <MyGroupsList />
+        <template #fallback> Loading... </template>
+      </suspense>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button @click="showCreationModal = !showCreationModal">
+          <ion-icon :icon="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
+    <NewGroupModal v-model="showCreationModal" />
   </ion-page>
 </template>
 
 <script setup lang="ts">
-  import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue'
+  import { ref } from 'vue'
+  import { IonPage, IonContent, IonFab, IonFabButton, IonIcon } from '@ionic/vue'
   import MyGroupsList from '@/components/MyGroupsList.vue'
   import MainHeader from '@/components/MainHeader.vue'
+  import NewGroupModal from '@/components/NewGroupModal.vue'
+  import { add } from 'ionicons/icons'
+
+  const showCreationModal = ref<boolean>(false)
 </script>
