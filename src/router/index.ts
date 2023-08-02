@@ -111,6 +111,10 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/',
+  },
 ]
 
 const router = createRouter({
