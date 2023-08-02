@@ -4,6 +4,7 @@ import { getCurrentUser } from 'vuefire'
 
 import MainLayout from '@/layouts/main.vue'
 import GroupLayout from '@/layouts/group.vue'
+import EventLayout from '@/layouts/event.vue'
 import AccountLayout from '@/layouts/account.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -34,6 +35,32 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'chat',
         component: () => import('@/pages/groups/_id/Chat.vue'),
+      },
+    ],
+  },
+  {
+    path: '/events/:id',
+    component: EventLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: '',
+        redirect: { name: 'event-info' },
+      },
+      {
+        name: 'event-info',
+        path: 'info',
+        component: () => import('@/pages/events/_id/Info.vue'),
+      },
+      {
+        path: 'participation',
+        component: () => import('@/pages/events/_id/Participation.vue'),
+      },
+      {
+        path: 'result',
+        component: () => import('@/pages/events/_id/Result.vue'),
       },
     ],
   },
