@@ -1,16 +1,17 @@
 <template>
-  <ion-page>
+  <MainMenu />
+  <ion-page id="main-content" v-bind="$attrs">
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" href="/home">
-          <ion-icon aria-hidden="true" :icon="home" />
-          <ion-label>Home</ion-label>
+        <ion-tab-button tab="home" href="/agenda">
+          <ion-icon aria-hidden="true" :icon="calendar" />
+          <ion-label>Agenda</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button @click="showCreationModal = !showCreationModal">
-          <ion-icon aria-hidden="true" :icon="add" />
-          <ion-label>New group</ion-label>
+        <ion-tab-button tab="discover" href="/discover">
+          <ion-icon aria-hidden="true" :icon="search" />
+          <ion-label>Discover</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="my-groups" href="/my-groups">
@@ -24,7 +25,6 @@
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
-    <NewGroupModal v-model="showCreationModal" />
   </ion-page>
 </template>
 
@@ -38,9 +38,6 @@
     IonPage,
     IonRouterOutlet,
   } from '@ionic/vue'
-  import { add, home, list, mail } from 'ionicons/icons'
-  import { ref } from 'vue'
-  import NewGroupModal from '@/components/NewGroupModal.vue'
-
-  const showCreationModal = ref<boolean>(false)
+  import { list, mail, search, calendar } from 'ionicons/icons'
+  import MainMenu from '@/components/MainMenu.vue'
 </script>

@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Home</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <MainHeader title="My account" />
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -20,9 +16,5 @@
 <script setup lang="ts">
   import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue'
   import ExploreContainer from '@/components/ExploreContainer.vue'
-  import { useFirebaseAuth } from 'vuefire'
-  import { auth } from '@/plugins/firebase'
-
-  console.log(useFirebaseAuth())
-  console.log(auth)
+  import MainHeader from '@/components/MainHeader.vue'
 </script>

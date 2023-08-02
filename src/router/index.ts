@@ -4,6 +4,8 @@ import { getCurrentUser } from 'vuefire'
 
 import MainLayout from '@/layouts/main.vue'
 import GroupLayout from '@/layouts/group.vue'
+import EventLayout from '@/layouts/event.vue'
+import AccountLayout from '@/layouts/account.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,9 +17,10 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/groups/:id/next-event',
+        redirect: { name: 'group-next-event' },
       },
       {
+        name: 'group-next-event',
         path: 'next-event',
         component: () => import('@/pages/groups/_id/NextEvent.vue'),
       },
@@ -35,7 +38,50 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  { path: '/login', component: () => import('@/pages/Login.vue')},
+  {
+    path: '/events/:id',
+    component: EventLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: '',
+        redirect: { name: 'event-info' },
+      },
+      {
+        name: 'event-info',
+        path: 'info',
+        component: () => import('@/pages/events/_id/Info.vue'),
+      },
+      {
+        path: 'participation',
+        component: () => import('@/pages/events/_id/Participation.vue'),
+      },
+      {
+        path: 'result',
+        component: () => import('@/pages/events/_id/Result.vue'),
+      },
+    ],
+  },
+  {
+    path: '/account',
+    component: AccountLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: 'me',
+        component: () => import('@/pages/account/Me.vue'),
+      },
+      {
+        path: '',
+        redirect: 'me',
+      },
+    ],
+  },
+  { path: '/login', component: () => import('@/pages/Login.vue') },
   {
     path: '/',
     component: MainLayout,
@@ -45,21 +91,29 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: '/home',
+        redirect: '/agenda',
       },
       {
-        path: 'home',
-        component: () => import('@/pages/Home.vue'),
+        path: 'agenda',
+        component: () => import('@/pages/main/Agenda.vue'),
+      },
+      {
+        path: 'discover',
+        component: () => import('@/pages/main/Discover.vue'),
       },
       {
         path: 'my-groups',
-        component: () => import('@/pages/MyGroups.vue'),
+        component: () => import('@/pages/main/MyGroups.vue'),
       },
       {
         path: 'messages',
-        component: () => import('@/pages/Messages.vue'),
+        component: () => import('@/pages/main/Messages.vue'),
       },
     ],
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/',
   },
 ]
 
