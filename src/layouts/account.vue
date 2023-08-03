@@ -3,10 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-button @click="$router.back()">
-            <ion-icon slot="start" aria-hidden="true" :icon="arrowBack"></ion-icon>
-            Back
-          </ion-button>
+          <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ groupName }}</ion-title>
       </ion-toolbar>
@@ -23,11 +20,8 @@
     IonToolbar,
     IonTitle,
     IonButtons,
-    IonButton,
-    IonIcon,
+    IonBackButton,
   } from '@ionic/vue'
-
-  import { arrowBack } from 'ionicons/icons'
 
   const groupName = 'ureh'
 </script>
