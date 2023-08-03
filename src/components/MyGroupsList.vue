@@ -1,6 +1,10 @@
 <template>
   <ion-content>
-    <ion-button v-for="(group, key) in groups" :key="key" :href="`/groups/${group.id}`">
+    <ion-button
+      v-for="(group, key) in groups"
+      :key="key"
+      @click="$router.push(`/groups/${group.id}`)"
+    >
       <ion-label>{{ group.name }}</ion-label>
     </ion-button>
   </ion-content>

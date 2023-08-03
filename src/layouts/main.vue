@@ -4,22 +4,22 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home" href="/agenda">
+        <ion-tab-button tab="home" @click="$router.push('/agenda')">
           <ion-icon aria-hidden="true" :icon="calendar" />
           <ion-label>Agenda</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="discover" href="/discover">
+        <ion-tab-button tab="discover" @click="$router.push('/discover')">
           <ion-icon aria-hidden="true" :icon="search" />
           <ion-label>Discover</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="my-groups" href="/my-groups">
+        <ion-tab-button tab="my-groups" @click="$router.push('/my-groups')">
           <ion-icon aria-hidden="true" :icon="list" />
           <ion-label>My groups</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="messages" href="/messages">
+        <ion-tab-button tab="messages" @click="$router.push('/messages')">
           <ion-icon aria-hidden="true" :icon="mail" />
           <ion-label>Messages</ion-label>
         </ion-tab-button>

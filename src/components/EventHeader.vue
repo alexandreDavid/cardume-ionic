@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button href="/">
+        <ion-button @click="$router.back()">
           <ion-icon slot="start" aria-hidden="true" :icon="arrowBack"></ion-icon>
           Back
         </ion-button>
