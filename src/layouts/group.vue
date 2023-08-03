@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-button href="/">
+          <ion-button @click="$router.back()">
             <ion-icon slot="start" aria-hidden="true" :icon="arrowBack"></ion-icon>
             Back
           </ion-button>
@@ -14,22 +14,22 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" :href="`/groups/${id}/next-event`">
+        <ion-tab-button tab="tab1" @click="$router.push(`/groups/${id}/next-event`)">
           <ion-icon aria-hidden="true" :icon="triangle" />
           <ion-label>NextEvent</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab2" :href="`/groups/${id}/events`">
+        <ion-tab-button tab="tab2" @click="$router.push(`/groups/${id}/events`)">
           <ion-icon aria-hidden="true" :icon="ellipse" />
           <ion-label>Events</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab3" :href="`/groups/${id}/members`">
+        <ion-tab-button tab="tab3" @click="$router.push(`/groups/${id}/members`)">
           <ion-icon aria-hidden="true" :icon="square" />
           <ion-label>Members</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="chat" :href="`/groups/${id}/chat`">
+        <ion-tab-button tab="chat" @click="$router.push(`/groups/${id}/chat`)">
           <ion-icon aria-hidden="true" :icon="chatbubbles" />
           <ion-label>Chat</ion-label>
         </ion-tab-button>

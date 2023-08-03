@@ -109,6 +109,10 @@ const routes: Array<RouteRecordRaw> = [
         path: 'messages',
         component: () => import('@/pages/main/Messages.vue'),
       },
+      {
+        path: 'new-event',
+        component: () => import('@/pages/main/CreateEvent.vue'),
+      },
     ],
   },
   {

@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-list>
-        <ion-item button href="account/me">
+        <ion-item button @click="$router.push('account/me')">
           <ion-label>My account</ion-label>
         </ion-item>
       </ion-list>

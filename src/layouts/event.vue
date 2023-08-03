@@ -3,17 +3,17 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" :href="`/events/${id}/info`">
+        <ion-tab-button tab="tab1" @click="$router.push(`/events/${id}/info`)">
           <ion-icon aria-hidden="true" :icon="triangle" />
           <ion-label>Info</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab2" :href="`/events/${id}/participation`">
+        <ion-tab-button tab="tab2" @click="$router.push(`/events/${id}/participation`)">
           <ion-icon aria-hidden="true" :icon="ellipse" />
           <ion-label>Participation</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab3" :href="`/events/${id}/result`">
+        <ion-tab-button tab="tab3" @click="$router.push(`/events/${id}/result`)">
           <ion-icon aria-hidden="true" :icon="square" />
           <ion-label>Result</ion-label>
         </ion-tab-button>

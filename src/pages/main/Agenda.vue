@@ -13,6 +13,11 @@
           loading-spinner="bubbles"
         ></ion-infinite-scroll-content>
       </ion-infinite-scroll>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button @click="$router.push('/new-event')">
+          <ion-icon :icon="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
   </ion-page>
 </template>
@@ -26,12 +31,16 @@
     IonInfiniteScrollContent,
     IonList,
     IonItem,
-    IonAvatar,
-    IonLabel,
     InfiniteScrollCustomEvent,
+    IonFab,
+    IonFabButton,
+    IonIcon,
   } from '@ionic/vue'
+
   import MainHeader from '@/components/MainHeader.vue'
   import AgendaCard from '@/components/agenda/AgendaCard.vue'
+
+  import { add } from 'ionicons/icons'
 
   const items = reactive<string[]>([])
 
