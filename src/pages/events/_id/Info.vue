@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <EventHeader name="Event" />
+    <EventHeader :event="event" />
     <ion-content fullscreen class="ion-padding">
       <h1>Animal Facts</h1>
 
@@ -69,6 +69,18 @@
 </template>
 
 <script setup lang="ts">
+  import { useRoute } from 'vue-router'
   import { IonPage, IonContent } from '@ionic/vue'
   import EventHeader from '@/components/EventHeader.vue'
+
+  import Event from '@/types/Event'
+
+  const route = useRoute()
+
+  const event: Event = {
+    id: String(route.params.id),
+    name: 'Event name',
+    description: 'Description',
+    date: new Date(),
+  }
 </script>

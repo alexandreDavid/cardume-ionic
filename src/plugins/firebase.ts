@@ -24,3 +24,4 @@ export const auth = getAuth()
 
 // here we can export reusable database references
 export const groupsRef = collection(db, 'groups')
+export const eventsRef = collection(db, 'events')
