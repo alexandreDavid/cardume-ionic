@@ -56,6 +56,7 @@
     IonIcon,
     IonLabel,
   } from '@ionic/vue'
+  import { useCurrentUser } from 'vuefire'
 
   import MainHeader from '@/components/MainHeader.vue'
 
@@ -63,6 +64,7 @@
 
   const router = useRouter()
 
+  const user = useCurrentUser()
   const name = ref<string>('')
   const date = ref<string>(new Date().toISOString())
   const description = ref<string>('')
@@ -72,6 +74,8 @@
       name: name.value,
       date: date.value,
       description: description.value,
+      members: [user.value?.uid],
+      admins: [user.value?.uid],
     })
     router.push(`/agenda`)
   }
