@@ -40,11 +40,6 @@
     IonIcon,
     IonPage,
     IonRouterOutlet,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButtons,
-    IonBackButton,
   } from '@ionic/vue'
   import { ellipse, square, triangle, chatbubbles } from 'ionicons/icons'
 

@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import { onUnmounted, reactive, ref } from 'vue'
-  import { onSnapshot, getDocs, query, orderBy, limit, DocumentData } from 'firebase/firestore'
+  import { onUnmounted, reactive } from 'vue'
+  import { onSnapshot, query, orderBy } from 'firebase/firestore'
   import { eventsRef } from '@/plugins/firebase'
   import {
     IonInfiniteScroll,
@@ -28,13 +28,8 @@
 
   import Event from '@/types/Event.d'
 
-  const limitRows = 10
-
-  const docs = ref<DocumentData[]>([])
-  docs.value = (await getDocs(query(eventsRef, orderBy('date'), limit(limitRows)))).docs
-
   const events = reactive<Event[]>([])
-  const unsubscribe = onSnapshot(query(eventsRef), (snapshot) => {
+  const unsubscribe = onSnapshot(query(eventsRef, orderBy('date')), (snapshot) => {
     snapshot.docChanges().forEach((change) => {
       const doc = change.doc
       if (change.type === 'added') {
