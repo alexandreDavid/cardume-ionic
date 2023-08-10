@@ -12,12 +12,23 @@
 
 <script setup lang="ts">
   import { reactive } from 'vue'
-  import { getDocs } from 'firebase/firestore'
+  import { getDocs, query, or, where } from 'firebase/firestore'
   import { groupsRef } from '@/plugins/firebase'
   import { IonLabel, IonContent, IonButton } from '@ionic/vue'
+  import { useCurrentUser } from 'vuefire'
+
+  const user = useCurrentUser()
 
   const groups = reactive<{ id: string; name: string }[]>([])
-  const querySnapshot = await getDocs(groupsRef)
+  const querySnapshot = await getDocs(
+    query(
+      groupsRef,
+      or(
+        where('members', 'array-contains-any', [user.value?.uid]),
+        where('admins', 'array-contains-any', [user.value?.uid]),
+      ),
+    ),
+  )
   querySnapshot.forEach((doc) => {
     groups.push({
       id: doc.id,

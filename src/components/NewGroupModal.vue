@@ -52,8 +52,10 @@
     IonTextarea,
   } from '@ionic/vue'
   import { ref, computed } from 'vue'
+  import { useCurrentUser } from 'vuefire'
 
   const router = useRouter()
+  const user = useCurrentUser()
 
   const props = defineProps<{
     modelValue: boolean
@@ -77,6 +79,8 @@
     const { id } = await addDoc(groupsRef, {
       name: name.value,
       description: description.value,
+      members: [user.value?.uid],
+      admins: [user.value?.uid],
     })
     router.push(`groups/${id}`)
 
