@@ -71,11 +71,13 @@
     if (!detail.data) {
       return
     }
-    const docRef = doc(db, 'events', props.event.id)
 
     if (detail.data.action === 'delete') {
+      const docRef = doc(db, 'events', props.event.id)
       await deleteDoc(docRef)
       router.back()
+    } else if (detail.data.action === 'edit') {
+      router.push(`/events/${props.event.id}/edit`)
     }
   }
 </script>

@@ -24,6 +24,7 @@
     "firebase": "^9.22.2",
     "firebaseui": "^6.0.2",
     "ionicons": "^7.0.0",
+    "marked": "^7.0.2",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuefire": "^3.1.0"
