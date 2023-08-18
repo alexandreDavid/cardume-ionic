@@ -19,6 +19,17 @@
           </ion-modal>
         </ion-item>
         <ion-item>
+          <ion-select
+            v-model="group"
+            label="Add an group to the event"
+            placeholder="Select a group"
+          >
+            <ion-select-option v-for="(grp, key) in groups" :key="key" :value="grp.id">{{
+              grp.name
+            }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
           <ion-textarea
             v-model="description"
             auto-grow
@@ -42,6 +53,7 @@
   import { doc, updateDoc } from 'firebase/firestore'
   import { eventsRef } from '@/plugins/firebase'
   import { useRouter } from 'vue-router'
+  import { useGroups } from '@/composables/groups'
 
   import {
     IonPage,
@@ -57,6 +69,8 @@
     IonFab,
     IonFabButton,
     IonIcon,
+    IonSelect,
+    IonSelectOption,
   } from '@ionic/vue'
   import EventHeader from '@/components/EventHeader.vue'
 
@@ -65,6 +79,9 @@
   import type Event from '@/types/Event'
 
   const router = useRouter()
+  const { getGroups } = useGroups()
+
+  const groups = getGroups()
 
   const props = defineProps<{
     event: Event
@@ -72,6 +89,7 @@
 
   const name = ref<string>(props.event.name)
   const date = ref<string>(new Date(props.event.date).toISOString())
+  const group = ref<string | undefined>(props.event.group)
   const description = ref<string>(props.event.description)
 
   const confirm = async () => {
@@ -79,6 +97,7 @@
     await updateDoc(docRef, {
       name: name.value,
       date: date.value,
+      group: group.value,
       description: description.value,
     })
     router.back()

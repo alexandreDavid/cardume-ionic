@@ -3,25 +3,20 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref, shallowRef, defineAsyncComponent } from 'vue'
+  import { onMounted, shallowRef, defineAsyncComponent } from 'vue'
   import { useRoute } from 'vue-router'
-  import { doc, getDoc } from 'firebase/firestore'
-  import { eventsRef } from '@/plugins/firebase'
+  import { useEvents } from '@/composables/events'
 
-  import type Event from '@/types/Event'
   import type { Component } from 'vue'
 
   const Trip = defineAsyncComponent(() => import('@/components/event/trip/Edit.vue'))
 
   const id = useRoute().params.id as string
+  const { getEventById } = useEvents()
 
-  const event = ref<Event | null>(null)
+  const { event } = getEventById(id)
   const comp = shallowRef<Component | null>(null)
   onMounted(async () => {
-    const docSnap = await getDoc(doc(eventsRef, id))
-    if (docSnap.exists()) {
-      event.value = { ...(docSnap.data() as Event), id: docSnap.id }
-      comp.value = Trip
-    }
+    comp.value = Trip
   })
 </script>
