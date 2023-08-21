@@ -34,7 +34,7 @@ export const useEvents = () => {
 
           unsubscribe && unsubscribe()
           unsubscribe = onSnapshot(
-            query(eventsRef, or(...constraints), orderBy('name')),
+            query(eventsRef, or(...constraints), orderBy('date')),
             (snapshot) => {
               snapshot.docChanges().forEach((change) => {
                 const doc = change.doc
@@ -45,6 +45,7 @@ export const useEvents = () => {
                     name: data.name,
                     date: data.date,
                     description: data.description,
+                    group: data.group,
                   })
                 } else {
                   const idx = events.findIndex((evt) => evt.id === doc.id)
@@ -62,6 +63,8 @@ export const useEvents = () => {
                   }
                 }
               })
+
+              events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
             },
           )
         },

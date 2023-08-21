@@ -9,6 +9,7 @@
             type="text"
             label="Event name"
             placeholder="The event name"
+            autocapitalize="on"
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -36,6 +37,7 @@
             type="text"
             label="Enter the description"
             placeholder="The event description"
+            autocapitalize="on"
           ></ion-textarea>
         </ion-item>
       </ion-list>
@@ -71,6 +73,7 @@
     IonIcon,
     IonSelect,
     IonSelectOption,
+    loadingController,
   } from '@ionic/vue'
   import EventHeader from '@/components/EventHeader.vue'
 
@@ -94,12 +97,17 @@
 
   const confirm = async () => {
     const docRef = doc(eventsRef, props.event.id)
+    const loading = await loadingController.create({
+      duration: 3000,
+    })
+    loading.present()
     await updateDoc(docRef, {
       name: name.value,
       date: date.value,
       group: group.value,
       description: description.value,
     })
+    loading.dismiss()
     router.back()
   }
 </script>

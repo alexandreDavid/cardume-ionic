@@ -9,6 +9,7 @@
             type="text"
             label="Event name"
             placeholder="The event name"
+            autocapitalize="on"
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -24,6 +25,7 @@
             type="text"
             label="Enter the description"
             placeholder="The event description"
+            autocapitalize="on"
           ></ion-textarea>
         </ion-item>
       </ion-list>
@@ -55,6 +57,7 @@
     IonFabButton,
     IonIcon,
     IonLabel,
+    loadingController,
   } from '@ionic/vue'
   import { useCurrentUser } from 'vuefire'
 
@@ -70,6 +73,10 @@
   const description = ref<string>('')
 
   const confirm = async () => {
+    const loading = await loadingController.create({
+      duration: 3000,
+    })
+    loading.present()
     await addDoc(eventsRef, {
       name: name.value,
       date: date.value,
@@ -77,6 +84,7 @@
       members: [user.value?.uid],
       admins: [user.value?.uid],
     })
+    loading.dismiss()
     router.push(`/agenda`)
   }
 </script>
