@@ -13,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import { onUnmounted, reactive } from 'vue'
-  import { onSnapshot, query, or, where, orderBy } from 'firebase/firestore'
-  import { eventsRef } from '@/plugins/firebase'
+  import { useEvents } from '@/composables/events'
+
   import {
     IonInfiniteScroll,
     IonInfiniteScrollContent,
@@ -23,52 +22,11 @@
     IonItem,
     InfiniteScrollCustomEvent,
   } from '@ionic/vue'
-  import { useCurrentUser } from 'vuefire'
 
   import AgendaCard from '@/components/agenda/AgendaCard.vue'
 
-  import Event from '@/types/Event.d'
-
-  const user = useCurrentUser()
-  const events = reactive<Event[]>([])
-  const unsubscribe = onSnapshot(
-    query(
-      eventsRef,
-      or(
-        where('members', 'array-contains-any', [user.value?.uid]),
-        where('admins', 'array-contains-any', [user.value?.uid]),
-      ),
-      orderBy('date'),
-    ),
-    (snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        const doc = change.doc
-        if (change.type === 'added') {
-          const data = doc.data()
-          events.push({
-            id: doc.id,
-            name: data.name,
-            date: data.date,
-            description: data.description,
-          })
-        } else {
-          const idx = events.findIndex((evt) => evt.id === doc.id)
-          if (change.type === 'modified') {
-            const data = doc.data()
-            events[idx] = {
-              id: doc.id,
-              name: data.name,
-              date: data.date,
-              description: data.description,
-            }
-          }
-          if (change.type === 'removed') {
-            events.splice(idx, 1)
-          }
-        }
-      })
-    },
-  )
+  const { getEvents } = useEvents()
+  const events = getEvents()
 
   const generateItems = async () => {
     console.log('generating items')
@@ -78,6 +36,4 @@
     generateItems()
     setTimeout(() => ev.target.complete(), 500)
   }
-
-  onUnmounted(() => unsubscribe())
 </script>
