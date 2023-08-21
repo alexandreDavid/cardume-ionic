@@ -20,6 +20,17 @@
           </ion-modal>
         </ion-item>
         <ion-item>
+          <ion-select
+            v-model="group"
+            label="Add an group to the event"
+            placeholder="Select a group"
+          >
+            <ion-select-option v-for="(grp, key) in groups" :key="key" :value="grp.id">{{
+              grp.name
+            }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
           <ion-textarea
             v-model="description"
             type="text"
@@ -27,6 +38,9 @@
             placeholder="The event description"
             autocapitalize="on"
           ></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ColorPicker v-model="color" label="Color" />
         </ion-item>
       </ion-list>
     </ion-content>
@@ -43,6 +57,9 @@
   import { useRouter } from 'vue-router'
   import { addDoc } from 'firebase/firestore'
   import { eventsRef } from '@/plugins/firebase'
+  import { useGroups } from '@/composables/groups'
+  import { useCurrentUser } from 'vuefire'
+
   import {
     IonPage,
     IonContent,
@@ -57,20 +74,27 @@
     IonFabButton,
     IonIcon,
     IonLabel,
+    IonSelect,
+    IonSelectOption,
     loadingController,
   } from '@ionic/vue'
-  import { useCurrentUser } from 'vuefire'
+  import ColorPicker from '@/components/ColorPicker.vue'
 
   import MainHeader from '@/components/MainHeader.vue'
 
   import { save } from 'ionicons/icons'
 
   const router = useRouter()
+  const { getGroups } = useGroups()
+
+  const groups = getGroups()
 
   const user = useCurrentUser()
   const name = ref<string>('')
   const date = ref<string>(new Date().toISOString())
+  const group = ref<string | undefined>(undefined)
   const description = ref<string>('')
+  const color = ref<string>('')
 
   const confirm = async () => {
     const loading = await loadingController.create({
@@ -80,9 +104,11 @@
     await addDoc(eventsRef, {
       name: name.value,
       date: date.value,
+      group: group.value,
       description: description.value,
       members: [user.value?.uid],
       admins: [user.value?.uid],
+      color: color.value,
     })
     loading.dismiss()
     router.push(`/agenda`)

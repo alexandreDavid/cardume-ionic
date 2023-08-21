@@ -4,4 +4,5 @@ export default interface Event {
   date: Date
   description: string
   group?: string
+  color: string
 }

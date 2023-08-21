@@ -46,6 +46,7 @@ export const useEvents = () => {
                     date: data.date,
                     description: data.description,
                     group: data.group,
+                    color: data.color,
                   })
                 } else {
                   const idx = events.findIndex((evt) => evt.id === doc.id)
@@ -56,6 +57,8 @@ export const useEvents = () => {
                       name: data.name,
                       date: data.date,
                       description: data.description,
+                      group: data.group,
+                      color: data.color,
                     }
                   }
                   if (change.type === 'removed') {
@@ -91,3 +94,17 @@ export const useEvents = () => {
     },
   }
 }
+
+export const colors = [
+  'tomato',
+  'flamingo',
+  'tangerine',
+  'banana',
+  'sage',
+  'basil',
+  'peacock',
+  'blueberry',
+  'lavender',
+  'grape',
+  'graphite',
+]

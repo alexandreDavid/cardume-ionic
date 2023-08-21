@@ -1,5 +1,5 @@
 <template>
-  <ion-card style="width: 100%" @click="$router.push(`/events/${event.id}`)">
+  <ion-card style="width: 100%" :color="event.color" @click="$router.push(`/events/${event.id}`)">
     <ion-card-header>
       <ion-card-title>{{ event.name }}</ion-card-title>
       <ion-card-subtitle>{{ formattedDate }} </ion-card-subtitle>
