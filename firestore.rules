@@ -39,11 +39,13 @@ service cloud.firestore {
       }
 
       function isInGroup(resource) {
-        return request.auth.uid in get(/databases/$(database)/documents/groups/$(resource.data.group)).data.members
+        return isSignedIn() &&
+          request.auth.uid in get(/databases/$(database)/documents/groups/$(resource.data.group)).data.members
       }
 
       function isInGroupAdmin(resource) {
-        return request.auth.uid in get(/databases/$(database)/documents/groups/$(resource.data.group)).data.admin
+        return isSignedIn() &&
+          request.auth.uid in get(/databases/$(database)/documents/groups/$(resource.data.group)).data.admin
       }
   }
 }

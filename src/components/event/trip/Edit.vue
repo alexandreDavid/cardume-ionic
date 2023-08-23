@@ -106,13 +106,17 @@
       duration: 3000,
     })
     loading.present()
-    await updateDoc(docRef, {
+    const event = {
       name: name.value,
-      date: date.value,
+      date: new Date(date.value).toISOString(),
       group: group.value,
       description: description.value,
       color: color.value,
-    })
+    }
+    if (group.value) {
+      event.group = group.value
+    }
+    await updateDoc(docRef, event)
     loading.dismiss()
     router.back()
   }

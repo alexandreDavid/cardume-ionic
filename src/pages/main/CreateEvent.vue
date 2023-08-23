@@ -5,7 +5,7 @@
       <ion-list>
         <ion-item>
           <ion-input
-            v-model="name"
+            v-model="form.name"
             type="text"
             label="Event name"
             placeholder="The event name"
@@ -14,14 +14,14 @@
         </ion-item>
         <ion-item>
           <ion-label>Date</ion-label>
-          <ion-datetime-button v-model="date" datetime="datetime"></ion-datetime-button>
+          <ion-datetime-button v-model="form.date" datetime="datetime"></ion-datetime-button>
           <ion-modal :keep-contents-mounted="true">
-            <ion-datetime id="datetime" v-model="date"></ion-datetime>
+            <ion-datetime id="datetime" v-model="form.date"></ion-datetime>
           </ion-modal>
         </ion-item>
         <ion-item>
           <ion-select
-            v-model="group"
+            v-model="form.group"
             label="Add an group to the event"
             placeholder="Select a group"
           >
@@ -32,7 +32,7 @@
         </ion-item>
         <ion-item>
           <ion-textarea
-            v-model="description"
+            v-model="form.description"
             type="text"
             label="Enter the description"
             placeholder="The event description"
@@ -40,7 +40,7 @@
           ></ion-textarea>
         </ion-item>
         <ion-item>
-          <ColorPicker v-model="color" label="Color" />
+          <ColorPicker v-model="form.color" label="Color" />
         </ion-item>
       </ion-list>
     </ion-content>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { reactive } from 'vue'
   import { useRouter } from 'vue-router'
   import { addDoc } from 'firebase/firestore'
   import { eventsRef } from '@/plugins/firebase'
@@ -90,27 +90,40 @@
   const groups = getGroups()
 
   const user = useCurrentUser()
-  const name = ref<string>('')
-  const date = ref<string>(new Date().toISOString())
-  const group = ref<string | undefined>(undefined)
-  const description = ref<string>('')
-  const color = ref<string>('')
+
+  const form = reactive<{
+    name: string
+    date: string
+    group: string | undefined
+    description: string
+    color: string
+  }>({
+    name: '',
+    date: new Date().toISOString(),
+    group: undefined,
+    description: '',
+    color: '',
+  })
 
   const confirm = async () => {
     const loading = await loadingController.create({
       duration: 3000,
     })
     loading.present()
+    if (!form.group) {
+      delete form.group
+    }
     await addDoc(eventsRef, {
-      name: name.value,
-      date: date.value,
-      group: group.value,
-      description: description.value,
+      ...form,
       members: [user.value?.uid],
       admins: [user.value?.uid],
-      color: color.value,
     })
     loading.dismiss()
+    form.name = ''
+    form.date = new Date().toISOString()
+    form.group = undefined
+    form.description = ''
+    form.color = ''
     router.push(`/agenda`)
   }
 </script>
