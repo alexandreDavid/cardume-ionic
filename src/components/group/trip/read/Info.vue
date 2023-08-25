@@ -2,6 +2,7 @@
   <h2>Information</h2>
   <ion-card style="width: 100%">
     <ion-card-content v-if="group.description">
+      <!-- eslint-disable-next-line vue/no-v-html -->
       <div v-html="output" />
     </ion-card-content>
   </ion-card>

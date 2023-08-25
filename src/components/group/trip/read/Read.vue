@@ -36,7 +36,7 @@
 
   import { ellipse, square, triangle } from 'ionicons/icons'
 
-  import type Group from '@/type/group'
+  import type Group from '@/types/Group'
 
   defineProps<{
     group: Group

@@ -109,7 +109,6 @@
     const event = {
       name: name.value,
       date: new Date(date.value).toISOString(),
-      group: group.value,
       description: description.value,
       color: color.value,
     }
