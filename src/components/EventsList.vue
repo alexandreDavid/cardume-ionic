@@ -25,8 +25,13 @@
 
   import AgendaCard from '@/components/agenda/AgendaCard.vue'
 
-  const { getEvents } = useEvents()
-  const events = getEvents()
+  const { getEvents, getEventsFromGroup } = useEvents()
+
+  const props = defineProps<{
+    groupId?: string
+  }>()
+
+  const events = props.groupId ? getEventsFromGroup(props.groupId) : getEvents()
 
   const generateItems = async () => {
     console.log('generating items')

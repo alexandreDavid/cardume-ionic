@@ -1,15 +1,53 @@
 import { ref, reactive, watch, onUnmounted } from 'vue'
-import { doc, onSnapshot, query, or, where, orderBy, Unsubscribe } from 'firebase/firestore'
+import { doc, onSnapshot, query, or, where, orderBy } from 'firebase/firestore'
 import { eventsRef } from '@/plugins/firebase'
 import { useCurrentUser } from 'vuefire'
 import { useGroups } from './groups'
 
 import type Event from '@/types/Event'
+import type { Unsubscribe, QueryFieldFilterConstraint } from 'firebase/firestore'
 
 export const useEvents = () => {
   const user = useCurrentUser()
   const { getGroups } = useGroups()
   const groups = getGroups()
+
+  const getEventsFromConstraints = (events: Event[], constraints: QueryFieldFilterConstraint[]) =>
+    onSnapshot(query(eventsRef, or(...constraints), orderBy('date')), (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        const doc = change.doc
+        if (change.type === 'added') {
+          const data = doc.data()
+          events.push({
+            id: doc.id,
+            name: data.name,
+            date: data.date,
+            description: data.description,
+            group: data.group,
+            color: data.color,
+          })
+        } else {
+          const idx = events.findIndex((evt: Event) => evt.id === doc.id)
+          if (change.type === 'modified') {
+            const data = doc.data()
+            events[idx] = {
+              id: doc.id,
+              name: data.name,
+              date: data.date,
+              description: data.description,
+              group: data.group,
+              color: data.color,
+            }
+          }
+          if (change.type === 'removed') {
+            events.splice(idx, 1)
+          }
+        }
+      })
+
+      events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    })
+
   return {
     getEvents: () => {
       const events = reactive<Event[]>([])
@@ -33,48 +71,21 @@ export const useEvents = () => {
           }
 
           unsubscribe && unsubscribe()
-          unsubscribe = onSnapshot(
-            query(eventsRef, or(...constraints), orderBy('date')),
-            (snapshot) => {
-              snapshot.docChanges().forEach((change) => {
-                const doc = change.doc
-                if (change.type === 'added') {
-                  const data = doc.data()
-                  events.push({
-                    id: doc.id,
-                    name: data.name,
-                    date: data.date,
-                    description: data.description,
-                    group: data.group,
-                    color: data.color,
-                  })
-                } else {
-                  const idx = events.findIndex((evt) => evt.id === doc.id)
-                  if (change.type === 'modified') {
-                    const data = doc.data()
-                    events[idx] = {
-                      id: doc.id,
-                      name: data.name,
-                      date: data.date,
-                      description: data.description,
-                      group: data.group,
-                      color: data.color,
-                    }
-                  }
-                  if (change.type === 'removed') {
-                    events.splice(idx, 1)
-                  }
-                }
-              })
-
-              events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-            },
-          )
+          unsubscribe = getEventsFromConstraints(events, constraints)
         },
         { immediate: true },
       )
 
       onUnmounted(() => unsubscribe && unsubscribe())
+
+      return events
+    },
+    getEventsFromGroup: (groupId: string) => {
+      const events = reactive<Event[]>([])
+      const constraints = [where('group', '==', groupId)]
+      const unsubscribe: Unsubscribe = getEventsFromConstraints(events, constraints)
+
+      onUnmounted(() => unsubscribe())
 
       return events
     },
