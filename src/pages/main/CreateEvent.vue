@@ -59,6 +59,7 @@
   import { eventsRef } from '@/plugins/firebase'
   import { useGroups } from '@/composables/groups'
   import { useCurrentUser } from 'vuefire'
+  import { formatDate } from '@/utils/date'
 
   import {
     IonPage,
@@ -79,7 +80,6 @@
     loadingController,
   } from '@ionic/vue'
   import ColorPicker from '@/components/ColorPicker.vue'
-
   import MainHeader from '@/components/MainHeader.vue'
 
   import { save } from 'ionicons/icons'
@@ -99,7 +99,7 @@
     color: string
   }>({
     name: '',
-    date: new Date().toISOString(),
+    date: formatDate(new Date()),
     group: undefined,
     description: '',
     color: '',
@@ -120,7 +120,7 @@
     })
     loading.dismiss()
     form.name = ''
-    form.date = new Date().toISOString()
+    form.date = formatDate(new Date())
     form.group = undefined
     form.description = ''
     form.color = ''

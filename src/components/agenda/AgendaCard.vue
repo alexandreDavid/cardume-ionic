@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
   import { computed } from 'vue'
+  import { formatDateToDisplay } from '@/utils/date'
   import {
     IonCard,
     IonCardHeader,
@@ -37,8 +38,5 @@
     event: Event
   }>()
 
-  const formattedDate = computed<string>(() => {
-    const date = new Date(props.event.date)
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
-  })
+  const formattedDate = computed<string>(() => formatDateToDisplay(props.event.date))
 </script>

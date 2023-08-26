@@ -20,6 +20,7 @@
   import { computed } from 'vue'
   import { marked } from 'marked'
   import { useGroups } from '@/composables/groups'
+  import { formatDateToDisplay } from '@/utils/date'
 
   import { IonPage, IonContent } from '@ionic/vue'
   import EventHeader from '@/components/EventHeader.vue'
@@ -38,10 +39,7 @@
     () => props.event.group && groups.find((group) => group.id === props.event.group)?.name,
   )
 
-  const formattedDate = computed<string>(() => {
-    const date = new Date(props.event.date)
-    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
-  })
+  const formattedDate = computed<string>(() => formatDateToDisplay(props.event.date))
 
   const output = computed(() => marked(props.event.description))
 </script>

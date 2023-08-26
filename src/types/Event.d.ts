@@ -1,8 +1,8 @@
 export default interface Event {
   id: string
   name: string
-  date: Date
+  date: string
   description: string
   group?: string
-  color: string
+  color?: string
 }

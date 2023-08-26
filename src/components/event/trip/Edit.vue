@@ -95,10 +95,10 @@
   }>()
 
   const name = ref<string>(props.event.name)
-  const date = ref<string>(new Date(props.event.date).toISOString())
+  const date = ref<string>(props.event.date)
   const group = ref<string | undefined>(props.event.group)
   const description = ref<string>(props.event.description)
-  const color = ref<string>(props.event.color)
+  const color = ref<string | undefined>(props.event.color)
 
   const confirm = async () => {
     const docRef = doc(eventsRef, props.event.id)
@@ -106,14 +106,16 @@
       duration: 3000,
     })
     loading.present()
-    const event = {
+    const event: { [x: string]: any } = {
       name: name.value,
-      date: new Date(date.value).toISOString(),
+      date: date.value,
       description: description.value,
-      color: color.value,
     }
     if (group.value) {
       event.group = group.value
+    }
+    if (color.value) {
+      event.color = color.value
     }
     await updateDoc(docRef, event)
     loading.dismiss()

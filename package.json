@@ -21,6 +21,7 @@
     "@capacitor/status-bar": "5.0.4",
     "@ionic/vue": "^7.0.0",
     "@ionic/vue-router": "^7.0.0",
+    "date-fns": "^2.30.0",
     "firebase": "^9.22.2",
     "firebaseui": "^6.0.2",
     "ionicons": "^7.0.0",
