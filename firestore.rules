@@ -45,7 +45,7 @@ service cloud.firestore {
 
       function isInGroupAdmin(resource) {
         return isSignedIn() &&
-          request.auth.uid in get(/databases/$(database)/documents/groups/$(resource.data.group)).data.admin
+          request.auth.uid in get(/databases/$(database)/documents/groups/$(resource.data.group)).data.admins
       }
   }
 }
