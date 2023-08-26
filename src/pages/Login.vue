@@ -11,8 +11,9 @@
   import { onMounted } from 'vue'
   import firebase from 'firebase/compat/app'
   import * as firebaseui from 'firebaseui'
-
   import { useFirebaseAuth } from 'vuefire'
+
+  import { IonContent } from '@ionic/vue'
 
   const auth = useFirebaseAuth()
 
