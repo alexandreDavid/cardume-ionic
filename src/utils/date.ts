@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, isSameDay, addDays, subDays } from 'date-fns'
 
 export const formatDate = (date: Date): string => {
   // We use the closest quarter of minutes
@@ -12,11 +12,19 @@ export const formatDate = (date: Date): string => {
   return format(date, `yyyy-MM-dd'T'HH:mm`)
 }
 
-export const formatDateToDisplay = (dateAsString: string): string => {
-  const date = new Date(dateAsString)
+export const formatDateToDisplay = (dateToDisplay: string | Date): string => {
+  if (typeof dateToDisplay === 'string') {
+    dateToDisplay = new Date(dateToDisplay)
+  }
   return (
-    date.toLocaleDateString() +
+    dateToDisplay.toLocaleDateString() +
     ' ' +
-    date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    dateToDisplay.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   )
 }
+
+export const formatDateForDatePicker = (date: string): string => {
+  return format(new Date(date), 'yyyy-MM-dd')
+}
+
+export { isSameDay, addDays, subDays }

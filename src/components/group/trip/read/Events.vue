@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-  import EventsList from '@/components/EventsList.vue'
+  import EventsList from '@/components/event-list/EventList.vue'
 
   import type Group from '@/types/Group'
 

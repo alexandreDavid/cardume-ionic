@@ -13,8 +13,6 @@
 </template>
 
 <script setup lang="ts">
-  import { useEvents } from '@/composables/events'
-
   import {
     IonInfiniteScroll,
     IonInfiniteScrollContent,
@@ -22,16 +20,13 @@
     IonItem,
     InfiniteScrollCustomEvent,
   } from '@ionic/vue'
-
   import AgendaCard from '@/components/agenda/AgendaCard.vue'
 
-  const { getEvents, getEventsFromGroup } = useEvents()
+  import type Event from '@/types/Event'
 
-  const props = defineProps<{
-    groupId?: string
+  defineProps<{
+    events: Event[]
   }>()
-
-  const events = props.groupId ? getEventsFromGroup(props.groupId) : getEvents()
 
   const generateItems = async () => {
     console.log('generating items')

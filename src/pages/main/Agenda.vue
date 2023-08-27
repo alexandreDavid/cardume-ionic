@@ -19,7 +19,7 @@
   import { IonPage, IonContent, IonFab, IonFabButton, IonIcon } from '@ionic/vue'
 
   import MainHeader from '@/components/MainHeader.vue'
-  import EventsList from '@/components/EventsList.vue'
+  import EventsList from '@/components/event-list/EventList.vue'
 
   import { add } from 'ionicons/icons'
 </script>
