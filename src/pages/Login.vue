@@ -11,8 +11,9 @@
   import { onMounted } from 'vue'
   import firebase from 'firebase/compat/app'
   import * as firebaseui from 'firebaseui'
-
   import { useFirebaseAuth } from 'vuefire'
+
+  import { IonContent } from '@ionic/vue'
 
   const auth = useFirebaseAuth()
 
@@ -21,7 +22,7 @@
       signInSuccessUrl: '/',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       // tosUrl and privacyPolicyUrl accept either url string or a callback

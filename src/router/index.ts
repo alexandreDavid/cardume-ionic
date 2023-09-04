@@ -3,66 +3,32 @@ import { RouteRecordRaw } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
 
 import MainLayout from '@/layouts/main.vue'
-import GroupLayout from '@/layouts/group.vue'
-import EventLayout from '@/layouts/event.vue'
 import AccountLayout from '@/layouts/account.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    name: 'group-read',
     path: '/groups/:id',
-    component: GroupLayout,
+    component: () => import('@/pages/groups/_id/Read.vue'),
     meta: {
       requiresAuth: true,
     },
-    children: [
-      {
-        path: '',
-        redirect: { name: 'group-next-event' },
-      },
-      {
-        name: 'group-next-event',
-        path: 'next-event',
-        component: () => import('@/pages/groups/_id/NextEvent.vue'),
-      },
-      {
-        path: 'events',
-        component: () => import('@/pages/groups/_id/Events.vue'),
-      },
-      {
-        path: 'members',
-        component: () => import('@/pages/groups/_id/Members.vue'),
-      },
-      {
-        path: 'chat',
-        component: () => import('@/pages/groups/_id/Chat.vue'),
-      },
-    ],
   },
   {
+    name: 'event-read',
     path: '/events/:id',
-    component: EventLayout,
+    component: () => import('@/pages/events/_id/Read.vue'),
     meta: {
       requiresAuth: true,
     },
-    children: [
-      {
-        path: '',
-        redirect: { name: 'event-info' },
-      },
-      {
-        name: 'event-info',
-        path: 'info',
-        component: () => import('@/pages/events/_id/Info.vue'),
-      },
-      {
-        path: 'participation',
-        component: () => import('@/pages/events/_id/Participation.vue'),
-      },
-      {
-        path: 'result',
-        component: () => import('@/pages/events/_id/Result.vue'),
-      },
-    ],
+  },
+  {
+    name: 'event-edit',
+    path: '/events/:id/edit',
+    component: () => import('@/pages/events/_id/Edit.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/account',

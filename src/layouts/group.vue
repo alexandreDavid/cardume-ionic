@@ -1,16 +1,5 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button @click="$router.back()">
-            <ion-icon slot="start" aria-hidden="true" :icon="arrowBack"></ion-icon>
-            Back
-          </ion-button>
-        </ion-buttons>
-        <ion-title>{{ groupName }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
@@ -51,14 +40,8 @@
     IonIcon,
     IonPage,
     IonRouterOutlet,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButtons,
-    IonButton,
-    IonBackButton,
   } from '@ionic/vue'
-  import { ellipse, square, triangle, chatbubbles, arrowBack } from 'ionicons/icons'
+  import { ellipse, square, triangle, chatbubbles } from 'ionicons/icons'
 
   const id = useRoute().params.id as string
 

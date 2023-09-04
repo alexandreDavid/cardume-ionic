@@ -11,17 +11,10 @@
 </template>
 
 <script setup lang="ts">
-  import { reactive } from 'vue'
-  import { getDocs } from 'firebase/firestore'
-  import { groupsRef } from '@/plugins/firebase'
   import { IonLabel, IonContent, IonButton } from '@ionic/vue'
+  import { useGroups } from '@/composables/groups'
 
-  const groups = reactive<{ id: string; name: string }[]>([])
-  const querySnapshot = await getDocs(groupsRef)
-  querySnapshot.forEach((doc) => {
-    groups.push({
-      id: doc.id,
-      name: doc.data().name,
-    })
-  })
+  const { getGroups } = useGroups()
+
+  const groups = getGroups()
 </script>
