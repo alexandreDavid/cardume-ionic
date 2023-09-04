@@ -42,11 +42,11 @@
   const emit = defineEmits(['update:modelValue'])
 
   const props = defineProps<{
-    modelValue: string
+    modelValue: string | undefined
     label?: string
   }>()
 
-  const color = computed<string>({
+  const color = computed<string | undefined>({
     get: () => props.modelValue,
     set: (val) => emit('update:modelValue', val),
   })
