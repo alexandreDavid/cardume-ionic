@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button default-href="/"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ groupName }}</ion-title>
+        <ion-title>My account</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-router-outlet></ion-router-outlet>
@@ -22,6 +22,4 @@
     IonButtons,
     IonBackButton,
   } from '@ionic/vue'
-
-  const groupName = 'ureh'
 </script>
