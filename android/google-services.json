@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1043354344923",
+    "project_id": "cardume-8b4bf",
+    "storage_bucket": "cardume-8b4bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043354344923:android:1795145390eed022399bfe",
+        "android_client_info": {
+          "package_name": "com.cardume.ionic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043354344923-fnjl6olsbdccu9nhtslt3fi7ant8tk3c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCN5Bqo7oTE6LqKfxPTc4JLFVQj6IwRQ28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043354344923-8it4bndqmqemjlut2tb7kdpstvi6bki8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1043354344923-bn1rpip2llckk3t9jr7hlt9bqoa0if89.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cardume.ionic"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
